@@ -25,20 +25,25 @@ fun ReadingRightNowArea(
     onClickDetails: (String) -> Unit
 ) {
     val scrollState = rememberScrollState()
+    val readingNowList = books.filter {
+        it.startedReading != null && it.finishedReading == null
+    }
 
-
-        if (loading.value) Loading()
-        if (error.value) ErrorReader(message = "Humm... We don't get any books.. add someone...")
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(280.dp)
-            .horizontalScroll(scrollState)
-    ) {
-        books.map {
-            CardBook(it) { book ->
-                onClickDetails(book)
+    when {
+        loading.value -> Loading()
+        error.value -> ErrorReader(message = "Humm... We don't get any books.. add someone...")
+        readingNowList.isNotEmpty() -> {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(280.dp)
+                    .horizontalScroll(scrollState)
+            ) {
+                readingNowList.map {
+                    CardBook(it) { book ->
+                        onClickDetails(book)
+                    }
+                }
             }
         }
     }

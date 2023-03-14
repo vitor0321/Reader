@@ -39,6 +39,7 @@ import com.walcker.reader.framework.network.firebaseModel.toBookUIFirebase
 import com.walcker.reader.presentation.components.ErrorReader
 import com.walcker.reader.presentation.components.Loading
 import com.walcker.reader.presentation.components.RoundedButton
+import com.walcker.reader.presentation.screens.home.HomeScreen
 import com.walcker.reader.presentation.screens.search.SearchScreen
 
 @Composable
@@ -165,7 +166,7 @@ private fun saveToFirebase(bookUI: BookUI, navigator: Navigator, error: MutableS
                     .update(hashMapOf("id" to docId) as Map<String, Any>)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            navigator.push(SearchScreen)
+                            navigator.push(HomeScreen)
                         }
                     }.addOnFailureListener {
                         error.value = true

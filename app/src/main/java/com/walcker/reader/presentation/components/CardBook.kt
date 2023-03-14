@@ -19,6 +19,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -63,7 +65,7 @@ fun CardBook(
             ) {
 
                 Image(
-                    painter = rememberImagePainter(data = bookUI.photoUrl?.replace("http", "https")),
+                    painter = rememberImagePainter(data = bookUI.photoUrl),
                     contentDescription = "book image",
                     modifier = Modifier
                         .height(180.dp)
@@ -121,11 +123,18 @@ fun CardBook(
 
         Spacer(modifier = Modifier.width(10.dp))
 
+        val isStartedReading = remember { mutableStateOf(false) }
+
         Row(
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.Bottom
         ) {
-            RoundedButton(label = "Reading", radius = 70)
+            isStartedReading.value = bookUI.startedReading != null
+
+            RoundedButton(
+                label = if (isStartedReading.value) "Reading" else "Not Yet",
+                radius = 70
+            )
         }
     }
 }

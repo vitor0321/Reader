@@ -22,18 +22,25 @@ fun BookListArea(
     onCardPressed: (String) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    if (loading.value) Loading()
-    if (error.value) ErrorReader(message = "Humm... We don't get any books.. add someone...")
+    val addedBook = listOfBooks.filter {
+        it.startedReading == null && it.finishedReading == null
+    }
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(280.dp)
-            .horizontalScroll(scrollState)
-    ) {
-        for (book in listOfBooks) {
-            CardBook(book) {
-                onCardPressed(it)
+    when {
+        loading.value -> Loading()
+        error.value -> ErrorReader(message = "Humm... We don't get any books.. add someone...")
+        listOfBooks.isNotEmpty() -> {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(280.dp)
+                    .horizontalScroll(scrollState)
+            ) {
+                addedBook.map {book->
+                    CardBook(book) {
+                        onCardPressed(it)
+                    }
+                }
             }
         }
     }

@@ -68,6 +68,7 @@ fun HomeObserver(viewModel: HomeScreenViewModel = hiltViewModel()) {
                 error.value = true
             }
             is HomeScreenViewModel.UiState.SuccessAllBooks -> {
+                listBookUI.clear()
                 uiState.booksList.map { book ->
                     book?.let { bookUI ->
                         if (bookUI.userId == currentUser?.uid) {
@@ -111,17 +112,18 @@ private fun HomeContent(
         ) {
 
             Column(
-                modifier = Modifier.verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.Center
+                modifier = Modifier.verticalScroll(rememberScrollState())
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Top
             ) {
 
-                TopOfHomeArea()
+                TopOfHomeArea(label = if (listBookUI.isEmpty()) "hummm ... is so empty" else "Your reading \n" + "activity right now...")
 
                 ReadingRightNowArea(books = listBookUI, loading = loading, error = error) { bookId ->
                     navigator.push(BookUpdateScreen(bookId = bookId))
                 }
 
-                TitleSection(label = "Reading List")
+                TitleSection(label = if (listBookUI.isEmpty()) "You need search a new book" else "Reading List")
 
                 BookListArea(listOfBooks = listBookUI,loading = loading, error = error) { bookId ->
                     navigator.push(BookUpdateScreen(bookId = bookId))

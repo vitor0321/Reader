@@ -26,7 +26,9 @@ import com.walcker.reader.presentation.components.TitleSection
 import com.walcker.reader.presentation.screens.stats.StatsScreen
 
 @Composable
-fun TopOfHomeArea() {
+fun TopOfHomeArea(
+    label: String
+) {
     val navigator = LocalNavigator.currentOrThrow
     val email = FirebaseAuth.getInstance().currentUser?.email
 
@@ -34,7 +36,7 @@ fun TopOfHomeArea() {
 
     Row {
 
-        TitleSection(label = "Your reading \n" + "activity right now...")
+        TitleSection(label = label)
 
         Spacer(modifier = Modifier.fillMaxWidth(0.7f))
         Column {

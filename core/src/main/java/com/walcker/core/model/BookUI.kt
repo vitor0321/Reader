@@ -1,8 +1,5 @@
 package com.walcker.core.model
 
-import com.google.protobuf.Timestamp
-
-
 data class BookUI(
     var id: String? = null,
     var title: String? = null,
@@ -14,8 +11,8 @@ data class BookUI(
     var rating: Int? = 0,
     var notes: String? = "",
     var pageCount: Int? = null,
-    var startedReading: Timestamp? = null,
-    var finishedReading: Timestamp? = null,
+    var startedReading: Boolean? = null,
+    var finishedReading: Boolean? = null,
     var userId: String? = null,
     var googleBookId: String? = null
 )

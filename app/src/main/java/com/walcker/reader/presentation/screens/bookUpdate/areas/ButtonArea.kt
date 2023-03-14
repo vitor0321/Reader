@@ -52,8 +52,8 @@ fun ButtonArea(
     Column {
         val changedNotes = bookUI.value.description != notesText.value
         val changedRating = bookUI.value.rating != ratingState.value
-        val isStartedTimestamp = if (isStartReading.value) Timestamp.getDefaultInstance() else bookUI.value.startedReading
-        val isFinishedTimeStamp = if (isFinishedReading.value) Timestamp.getDefaultInstance() else bookUI.value.finishedReading
+        val isStartedTimestamp = if (isStartReading.value) true else bookUI.value.startedReading
+        val isFinishedTimeStamp = if (isFinishedReading.value) true else bookUI.value.finishedReading
 
         val bookUpdate = changedNotes || changedRating || isFinishedReading.value || isStartReading.value
 
@@ -73,7 +73,7 @@ fun ButtonArea(
             TextButton(
                 onClick = {
                     isStartReading.value = !isStartReading.value
-                    bookUI.value.startedReading = if (isStartReading.value) Timestamp.getDefaultInstance() else null
+                    bookUI.value.startedReading = if (isStartReading.value) true else null
                 },
                 enabled = bookUI.value.startedReading == null
             ) {
@@ -86,7 +86,7 @@ fun ButtonArea(
                     }
                 } else {
                     Text(
-                        text = "Started on: ${bookUI.value.startedReading?.seconds}",
+                        text = "Started on: ${bookUI.value.startedReading}",
                         color = MaterialTheme.colors.secondary
                     )
                 }
@@ -113,7 +113,7 @@ fun ButtonArea(
                     }
                 } else {
                     Text(
-                        text = "Finished on: ${bookUI.value.finishedReading?.seconds}",
+                        text = "Finished on: ${bookUI.value.finishedReading}",
                         color = MaterialTheme.colors.secondary
                     )
                 }
@@ -165,6 +165,9 @@ fun ButtonArea(
                                 navigator.push(HomeScreen)
                                 loading.value = false
                             }
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(context, "Humm.. something is wrong", Toast.LENGTH_SHORT).show()
                         }
                 }
             }

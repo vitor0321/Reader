@@ -23,10 +23,10 @@ data class BookUIFirebase(
     var pageCount: Int? = null,
     @get:PropertyName("started_reading")
     @set:PropertyName("started_reading")
-    var startedReading: Timestamp? = null,
+    var startedReading: Boolean? = null,
     @get:PropertyName("finished_reading")
     @set:PropertyName("finished_reading")
-    var finishedReading: Timestamp? = null,
+    var finishedReading: Boolean? = null,
     @get:PropertyName("user_id")
     @set:PropertyName("user_id")
     var userId: String? = null,
