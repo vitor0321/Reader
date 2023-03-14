@@ -1,38 +1,24 @@
 package com.walcker.reader.framework.network.response
 
+import com.google.gson.annotations.SerializedName
 import com.walcker.core.model.BookUI
 
 data class Item(
+    @SerializedName("id")
     val id: String,
+    @SerializedName("volumeInfo")
     val volumeInfo: VolumeInfo
 )
 
-fun Item.toBookUI():BookUI{
+fun Item.toBookUI(): BookUI {
     return BookUI(
         id = this.id,
         title = this.volumeInfo.title,
-        authors = this.volumeInfo.authors,
-        notes = this.volumeInfo.description,
+        authors = if (this.volumeInfo.authors != null) this.volumeInfo.authors[0] else "",
+        description = this.volumeInfo.description,
         date = this.volumeInfo.publishedDate,
-        category = this.volumeInfo.categories,
-        images = this.volumeInfo.imageLinks.thumbnail
+        category = if (this.volumeInfo.categories != null) this.volumeInfo.categories[0] else "",
+        photoUrl = this.volumeInfo.imageLinks.thumbnail.replace("http", "https"),
+        pageCount = this.volumeInfo.pageCount
     )
-}
-
-fun List<Item>.toListBookUI():List<BookUI>{
-    val listBookUI = mutableListOf<BookUI>()
-    this.map {
-       listBookUI.add(
-           BookUI(
-               id = it.id,
-               title = it.volumeInfo.title,
-               authors = it.volumeInfo.authors,
-               notes = it.volumeInfo.description,
-               date = it.volumeInfo.publishedDate,
-               category = it.volumeInfo.categories,
-               images = it.volumeInfo.imageLinks.thumbnail
-           )
-       )
-    }
-    return listBookUI
 }

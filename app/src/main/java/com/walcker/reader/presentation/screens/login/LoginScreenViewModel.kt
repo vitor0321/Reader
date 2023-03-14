@@ -43,7 +43,7 @@ class LoginScreenViewModel @Inject constructor() : ViewModel() {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val displayName = task.result.user?.email?.split('@')?.get(0)
+                            val displayName = task.result?.user?.email?.split('@')?.get(0)
                             createUser(displayName)
 
                             home()
@@ -69,22 +69,5 @@ class LoginScreenViewModel @Inject constructor() : ViewModel() {
 
         FirebaseFirestore.getInstance().collection("users")
             .add(user)
-    }
-}
-
-data class LoadingState(val status: Status, val message: String? = null) {
-
-    companion object {
-        val SUCCESS = LoadingState(Status.SUCCESS)
-        val FAILED = LoadingState(Status.FAILED)
-        val LOADING = LoadingState(Status.LOADING)
-        val IDLE = LoadingState(Status.IDLE)
-    }
-
-    enum class Status {
-        SUCCESS,
-        FAILED,
-        LOADING,
-        IDLE
     }
 }

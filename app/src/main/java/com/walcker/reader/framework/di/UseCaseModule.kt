@@ -1,5 +1,7 @@
 package com.walcker.reader.framework.di
 
+import com.walcker.core.usecase.GetAllBooksFromDatabaseUseCase
+import com.walcker.core.usecase.GetAllBooksFromDatabaseUseCaseImpl
 import com.walcker.core.usecase.GetAllBooksUseCase
 import com.walcker.core.usecase.GetAllBooksUseCaseImpl
 import com.walcker.core.usecase.GetBookIdUseCase
@@ -18,4 +20,7 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetBookIdUseCase(useCase: GetBookIdUseCaseImpl): GetBookIdUseCase
+
+    @Binds
+    fun bindGetAllBooksFromDatabaseUseCase(useCase: GetAllBooksFromDatabaseUseCaseImpl): GetAllBooksFromDatabaseUseCase
 }

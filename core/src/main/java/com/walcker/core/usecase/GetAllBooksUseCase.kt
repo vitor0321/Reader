@@ -24,9 +24,9 @@ class GetAllBooksUseCaseImpl @Inject constructor(
     override suspend fun doWork(
         params: GetAllBooksUseCase.Params
     ): ResultStatus<List<BookUI>> {
-        return withContext(dispatchers.io()) {
+
             val data = repository.getBooks(params.searchQuery)
-            ResultStatus.Success(data)
-        }
+          return  ResultStatus.Success(data)
+
     }
 }

@@ -26,6 +26,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.walcker.core.model.BookUI
 import com.walcker.reader.presentation.components.TopBar
+import com.walcker.reader.presentation.screens.detatils.DetailsScreen
 import com.walcker.reader.presentation.screens.home.HomeScreen
 import com.walcker.reader.presentation.screens.search.areas.SearchFromTopArea
 import com.walcker.reader.presentation.screens.search.areas.SearchListOfBooks
@@ -62,14 +63,14 @@ fun SearchContent(viewModel: SearchViewModel = hiltViewModel()) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
-                ) {
-                    viewModel.getAllBooks("Android")
+                ) { search ->
+                    viewModel.getAllBooks(search)
                 }
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                SearchListOfBooks(viewModel = viewModel) {
-
+                SearchListOfBooks { bookId ->
+                    navigator.push(DetailsScreen(bookId = bookId))
                 }
             }
         }

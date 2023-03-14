@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -18,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun BookRating(score: Double = 4.5) {
+fun BookRating(score: Int? = 0) {
     Surface(
         modifier = Modifier
             .height(70.dp)
@@ -39,9 +41,11 @@ fun BookRating(score: Double = 4.5) {
                 contentDescription = "star",
                 modifier = Modifier.padding(3.dp)
             )
-            Text(text = score.toString(),
+            Text(
+                text = score.toString(),
                 color = Color.White,
-                style = MaterialTheme.typography.subtitle1)
+                style = MaterialTheme.typography.subtitle1
+            )
         }
     }
 }

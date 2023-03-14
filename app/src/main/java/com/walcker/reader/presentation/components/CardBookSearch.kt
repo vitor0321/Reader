@@ -33,7 +33,7 @@ fun CardBookSearch(
     Surface(
         modifier = Modifier
             .clickable {
-                onPressDetails(bookUI.title.toString())
+                onPressDetails(bookUI.id.toString())
             }
             .fillMaxWidth()
             .padding(6.dp),
@@ -41,7 +41,7 @@ fun CardBookSearch(
     ) {
         Row {
             Image(
-                painter = rememberImagePainter(data = bookUI.images?.replace("http", "https")),
+                painter = rememberImagePainter(data = bookUI.photoUrl),
                 contentDescription = "book image",
                 modifier = Modifier
                     .height(110.dp)
@@ -111,7 +111,7 @@ fun CardBookSearch(
                     })
 
                 Text(
-                    text = bookUI.category.toString(),
+                    text = if (bookUI.category !=null) bookUI.category.toString() else "...",
                     maxLines = 1,
                     overflow = TextOverflow.Clip,
                     fontStyle = FontStyle.Italic,

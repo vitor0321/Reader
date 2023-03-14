@@ -18,7 +18,6 @@ import com.walcker.reader.presentation.components.InputField
 @Composable
 fun SearchFromTopArea(
     modifier: Modifier = Modifier,
-    loading: Boolean = false,
     hint: String = "Search",
     onSearch: (String) -> Unit = {}
 ) {

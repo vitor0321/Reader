@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 interface GetBookIdUseCase {
 
-    operator fun invoke(params: Params): Flow<ResultStatus<BookUI>>
+    suspend fun invoke(params: Params): ResultStatus<BookUI>
 
     data class Params(val searchQueryId: String)
 }
@@ -19,14 +19,17 @@ interface GetBookIdUseCase {
 class GetBookIdUseCaseImpl @Inject constructor(
     private val repository: BookRepositoryRemote,
     private val dispatchers: CoroutinesDispatchers
-) : GetBookIdUseCase, UseCase<GetBookIdUseCase.Params, BookUI>() {
+) : GetBookIdUseCase {
 
-    override suspend fun doWork(
-        params: GetBookIdUseCase.Params
-    ): ResultStatus<BookUI> {
+    override suspend fun invoke(params: GetBookIdUseCase.Params): ResultStatus<BookUI> {
         return withContext(dispatchers.io()) {
-            val data = repository.getBooksId(params.searchQueryId)
-            ResultStatus.Success(data)
+            try {
+                ResultStatus.Loading
+                val data = repository.getBooksId(params.searchQueryId)
+                ResultStatus.Success(data)
+            } catch (t: Throwable) {
+                ResultStatus.Error(t)
+            }
         }
     }
 }

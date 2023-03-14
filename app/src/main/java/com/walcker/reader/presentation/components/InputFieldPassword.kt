@@ -37,7 +37,7 @@ fun InputFieldPassword(
     onAction: KeyboardActions = KeyboardActions.Default
 ) {
 
-    val visualTransformation = if (passwordVisibility?.value == true) VisualTransformation.None else PasswordVisualTransformation()
+    val visualTransformation = if (passwordVisibility.value) VisualTransformation.None else PasswordVisualTransformation()
 
     OutlinedTextField(
         modifier = modifier

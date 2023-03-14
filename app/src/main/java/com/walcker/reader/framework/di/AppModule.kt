@@ -1,5 +1,7 @@
 package com.walcker.reader.framework.di
 
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.walcker.core.data.utils.Constants.BASE_URL
 import com.walcker.reader.framework.network.BooksApi
 import dagger.Module
@@ -14,13 +16,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-//    @Singleton
-//    @Provides
-//    fun provideBookApi(): BooksApi{
-//        return Retrofit.Builder()
-//            .baseUrl(BASE_URL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//            .create(BooksApi::class.java)
-//    }
+    @Singleton
+   @Provides
+   fun provideBookApi(): Query{
+       return FirebaseFirestore.getInstance()
+           .collection("books")
+  }
 }

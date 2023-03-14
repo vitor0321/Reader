@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 fun RoundedButton(
     label: String = "Reading",
     radius: Int = 29,
-    onPress: () -> Unit = {}
+     onPress: () -> Unit = {}
 ) {
 
     Surface(
