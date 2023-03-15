@@ -50,7 +50,7 @@ fun CardBookUpdate(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Image(
-                        painter = rememberImagePainter(data = bookUI.value.photoUrl?.replace("http", "https")),
+                        painter = rememberImagePainter(data = bookUI.value.photoUrl),
                         contentDescription = null,
                         modifier = Modifier
                             .height(100.dp)
