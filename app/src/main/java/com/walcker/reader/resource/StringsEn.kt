@@ -32,6 +32,13 @@ internal val StringsEn = Strings(
         yourStatus = "Your Stats",
         reading = "You're reading:",
         read = "You've read",
-        type = "book"
+        type = "book",
+        booksReading = { reading, count, type ->
+            val value = when (count) {
+                0, 1 -> type
+                else -> type + "s"
+            }
+            "$reading $count $value"
+        }
     )
 )

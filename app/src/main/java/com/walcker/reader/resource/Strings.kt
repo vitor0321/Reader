@@ -42,11 +42,5 @@ data class StringsStats(
     val reading: String,
     val read: String,
     val type: String,
-    val booksReading: (reading: String, count: Int, type: String) -> String = { reading, count, type ->
-        val value = when (count) {
-            0, 1 -> type
-            else -> type+"s"
-        }
-        "$reading $count $value"
-    },
+    val booksReading: (reading: String, count: Int, type: String) -> String ,
 )

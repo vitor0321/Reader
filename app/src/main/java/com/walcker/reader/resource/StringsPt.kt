@@ -32,6 +32,13 @@ internal val StringsPt = Strings(
         yourStatus = "Seus estatos",
         reading = "Você está lendo:",
         read = "Você leu:",
-        type = "livro"
+        type = "livro",
+        booksReading = { reading, count, type ->
+            val value = when (count) {
+                0, 1 -> type
+                else -> type + "s"
+            }
+            "$reading $count $value"
+        }
     )
 )
