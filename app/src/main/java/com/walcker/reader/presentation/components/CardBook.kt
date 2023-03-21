@@ -30,7 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.walcker.core.model.BookUI
+import com.walcker.domain.model.BookUI
 
 @Preview
 @Composable

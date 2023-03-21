@@ -8,17 +8,20 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FloatButton(onTap: () -> Unit) {
+fun FloatButton(
+    icon: ImageVector,
+    onTap: () -> Unit) {
     FloatingActionButton(
         onClick = { onTap() },
         shape = RoundedCornerShape(50.dp),
         backgroundColor = Color.Red
     ) {
         Icon(
-            imageVector = Icons.Default.Add,
+            imageVector = icon,
             contentDescription = "Add a book",
             tint = MaterialTheme.colors.primary.copy(alpha = 0.8f)
         )

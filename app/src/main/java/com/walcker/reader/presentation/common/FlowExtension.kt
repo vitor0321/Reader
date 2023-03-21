@@ -1,6 +1,6 @@
 package com.walcker.reader.presentation.common
 
-import com.walcker.core.usecase.base.ResultStatus
+import com.walcker.domain.usecase.base.ResultStatus
 import kotlinx.coroutines.flow.Flow
 
 suspend fun <T> Flow<ResultStatus<T>>.watchStatus(
