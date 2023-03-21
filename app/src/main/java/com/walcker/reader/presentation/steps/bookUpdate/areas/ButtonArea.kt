@@ -32,6 +32,7 @@ import com.walcker.reader.R
 import com.walcker.reader.presentation.components.RoundedButton
 import com.walcker.reader.presentation.components.ShowAlertDialog
 import com.walcker.reader.presentation.steps.home.HomeScreen
+import com.walcker.reader.resource.LocalStrings
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -46,6 +47,7 @@ fun ButtonArea(
 ) {
     val navigator = LocalNavigator.currentOrThrow
     val context = LocalContext.current
+    val strings = LocalStrings.current
 
     Column {
         val changedNotes = bookUI.value.description != notesText.value
@@ -149,7 +151,7 @@ fun ButtonArea(
             val openDialog = remember { mutableStateOf(false) }
             if (openDialog.value) {
                 ShowAlertDialog(
-                    message = stringResource(id = R.string.sure) + "\n" + stringResource(id = R.string.action),
+                    message = strings.update.messageDialog,
                     openDialog = openDialog
                 ) {
                     loading.value = true

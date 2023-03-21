@@ -34,17 +34,20 @@ import com.walcker.reader.presentation.steps.bookUpdate.areas.ButtonArea
 import com.walcker.reader.presentation.steps.bookUpdate.areas.CardBookUpdate
 import com.walcker.reader.presentation.steps.bookUpdate.areas.FormBookUpdate
 import com.walcker.reader.presentation.steps.home.HomeScreenViewModel
+import com.walcker.reader.resource.LocalStrings
 
-class  BookUpdateScreen(val bookId: String) : Step("update_screen") {
+class BookUpdateScreen(val bookId: String) : Step("update_screen") {
 
     @RequiresApi(Build.VERSION_CODES.O)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
+        val strings = LocalStrings.current
+
         Scaffold(
             topBar = {
                 TopBar(
-                    title = "Update book",
+                    title = strings.update.title,
                     icon = Icons.Default.ArrowBack,
                     isHomeScreen = false
                 ) {
@@ -63,7 +66,7 @@ class  BookUpdateScreen(val bookId: String) : Step("update_screen") {
 @Composable
 private fun UpdateScreenObserver(
     bookId: String,
-    viewModel: HomeScreenViewModel = hiltViewModel()
+    viewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val currentUser = FirebaseAuth.getInstance().currentUser
@@ -124,7 +127,7 @@ private fun UpdateScreenContent(
 private fun ShowUpdateView(
     bookUI: MutableState<BookUI>,
     loading: MutableState<Boolean>,
-    error: MutableState<Boolean>
+    error: MutableState<Boolean>,
 ) {
     val notesText = remember { mutableStateOf("") }
     val ratingState = remember { mutableStateOf(0) }

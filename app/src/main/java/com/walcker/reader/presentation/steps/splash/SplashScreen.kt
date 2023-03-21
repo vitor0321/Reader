@@ -34,6 +34,7 @@ import com.walcker.reader.presentation.common.Step
 import com.walcker.reader.presentation.components.ReaderLogo
 import com.walcker.reader.presentation.steps.home.HomeScreen
 import com.walcker.reader.presentation.steps.login.LoginScreen
+import com.walcker.reader.resource.LocalStrings
 import kotlinx.coroutines.delay
 
 private const val secondsNextStep = 1000L
@@ -49,6 +50,7 @@ object SplashScreen : Step("splash_screen") {
 @Composable
 private fun ContentSplashScreen() {
     val navigator = LocalNavigator.currentOrThrow
+    val strings = LocalStrings.current
     val scale = remember { Animatable(0f) }
 
     LaunchedEffect(key1 = true) {
@@ -102,7 +104,7 @@ private fun ContentSplashScreen() {
                     Spacer(modifier = Modifier.height(15.dp))
 
                     Text(
-                        text = "\"Read. Change. Yourself\"",
+                        text = strings.splash.slogan,
                         style = MaterialTheme.typography.h5,
                         color = Color.LightGray
                     )

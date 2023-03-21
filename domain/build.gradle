@@ -11,10 +11,10 @@ java {
 dependencies {
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
-    implementation "javax.inject:javax.inject:1"
+    implementation libs.coroutines.core
+    implementation libs.javax
 
     //Firebase
-    implementation platform('com.google.firebase:firebase-bom:30.0.0')
-    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.firestore
 }

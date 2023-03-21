@@ -23,6 +23,7 @@ import com.walcker.reader.presentation.steps.detatils.DetailsScreen
 import com.walcker.reader.presentation.steps.home.HomeScreen
 import com.walcker.reader.presentation.steps.search.areas.SearchFromTopArea
 import com.walcker.reader.presentation.steps.search.areas.SearchListOfBooks
+import com.walcker.reader.resource.LocalStrings
 
 object SearchScreen : Step("search_screen") {
 
@@ -35,11 +36,12 @@ object SearchScreen : Step("search_screen") {
 @Composable
 fun SearchContent(viewModel: SearchViewModel = hiltViewModel()) {
     val navigator = LocalNavigator.currentOrThrow
+    val strings = LocalStrings.current
 
     Scaffold(
         topBar = {
             TopBar(
-                title = "Search",
+                title = strings.search.title,
                 icon = Icons.Default.ArrowBack,
                 isHomeScreen = false
             ) {

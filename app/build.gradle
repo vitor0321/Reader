@@ -1,3 +1,4 @@
+apply plugin: "com.google.devtools.ksp"
 apply from: "../android-module.gradle"
 
 android {
@@ -6,19 +7,15 @@ android {
     }
 }
 
+ksp {
+    arg("lyricist.internalVisibility", "true")
+}
+
 dependencies {
-    constraints {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
-            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
-        }
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
-            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
-        }
-    }
     implementation project(':domain')
 
     implementation libs.core.ktx
-    implementation libs.lifecycle.runtime
+    implementation platform(libs.kotlin.bom)
 
     implementation libs.compose.activity
     implementation libs.compose.ui
@@ -47,13 +44,16 @@ dependencies {
     implementation libs.voyager.hilt
     implementation libs.voyager.livedata
 
+    implementation libs.lyricist
+    ksp libs.lyricist.processor
+
     implementation libs.coroutines.core
     implementation libs.coroutines.android
     implementation libs.coroutines.play
 
     implementation libs.lifecycle.livedata
     implementation libs.lifecycle.viewmodel
-    implementation libs.lifecycleruntime
+    implementation libs.lifecycle.runtime
 
     implementation libs.coil
 

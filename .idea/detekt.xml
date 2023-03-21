@@ -3,7 +3,7 @@
   <component name="DetektPluginSettings">
     <option name="configurationFiles">
       <list>
-        <option value="$PROJECT_DIR$/../../XML/marvel-app-hilt/config/detekt/detekt.yml" />
+        <option value="$PROJECT_DIR$/config/detekt/detekt.yml" />
       </list>
     </option>
     <option name="treatAsErrors" value="true" />

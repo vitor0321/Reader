@@ -7,12 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
@@ -22,8 +19,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,8 +34,8 @@ import com.walcker.reader.presentation.steps.bookUpdate.BookUpdateScreen
 import com.walcker.reader.presentation.steps.home.areas.BookListArea
 import com.walcker.reader.presentation.steps.home.areas.ReadingRightNowArea
 import com.walcker.reader.presentation.steps.home.areas.TopOfHomeArea
-import com.walcker.reader.presentation.steps.openbanking.OpenbankingScreen
 import com.walcker.reader.presentation.steps.search.SearchScreen
+import com.walcker.reader.resource.LocalStrings
 
 object HomeScreen : Step("home_screen") {
 
@@ -52,7 +47,6 @@ object HomeScreen : Step("home_screen") {
 
 @Composable
 fun HomeObserver(viewModel: HomeScreenViewModel = hiltViewModel()) {
-
     val listBookUI = remember { mutableStateListOf<BookUI>() }
     val loading = remember { mutableStateOf(false) }
     val error = remember { mutableStateOf(false) }
@@ -97,41 +91,13 @@ private fun HomeContent(
     listBookUI: SnapshotStateList<BookUI>,
 ) {
     val navigator = LocalNavigator.currentOrThrow
-    val context = LocalContext.current
-    val packageManager = context.packageManager
+    val strings = LocalStrings.current
 
     Scaffold(
-        topBar = { TopBar(title = "A.Reader") },
+        topBar = { TopBar(title = strings.home.title) },
         backgroundColor = MaterialTheme.colors.primary,
         floatingActionButton = {
             Row {
-//                FloatButton(
-//                    Icons.Default.Apps
-//                ) {
-//                    val intent = Intent(
-//                        Intent.ACTION_VIEW,
-//                        Uri.parse("com.example.movieapp")
-//                    )
-//                    intent.putExtra("deeplink", "deeplink is working")
-//                    val pendingIntent = TaskStackBuilder.create(context).run {
-//                        addNextIntentWithParentStack(intent)
-//                        getPendingIntent(
-//                            0,
-//                            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-//                        )
-//                    }
-//                    pendingIntent.send()
-//
-//                    //1 tentativa
-////                    val weatherApp = packageManager.getLaunchIntentForPackage("com.example.movieapp")
-////                    weatherApp?.putExtra("data", "This from Reader App")
-////                    if (weatherApp != null) {
-////                        startActivity(context, weatherApp, Bundle())
-////                    } else {
-////                        Toast.makeText(context, "Is not Success", Toast.LENGTH_LONG).show()
-////                    }
-//                }
-//                Spacer(modifier = Modifier.width(10.dp))
                 FloatButton(icon = Icons.Default.Add) {
                     navigator.push(SearchScreen)
                 }
@@ -153,18 +119,6 @@ private fun HomeContent(
                     .fillMaxSize(),
                 verticalArrangement = Arrangement.Top
             ) {
-
-                Button(
-                    onClick = {
-                        navigator.replace(OpenbankingScreen(""))
-                    },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Green.copy(alpha = 0.5f)),
-                ) {
-                    Text(
-                        text = "Open Banking",
-                        color = Color.White
-                    )
-                }
 
                 TopOfHomeArea(
                     label = if (listBookUI.isEmpty())

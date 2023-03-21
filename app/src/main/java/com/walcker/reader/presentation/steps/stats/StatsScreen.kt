@@ -45,6 +45,7 @@ import com.walcker.reader.presentation.components.Loading
 import com.walcker.reader.presentation.components.TopBar
 import com.walcker.reader.presentation.steps.home.HomeScreen
 import com.walcker.reader.presentation.steps.home.HomeScreenViewModel
+import com.walcker.reader.resource.LocalStrings
 
 object StatsScreen : Step("stats_screen") {
 
@@ -56,7 +57,7 @@ object StatsScreen : Step("stats_screen") {
 
 @Composable
 fun StatsScreenObserver(
-    viewModel: HomeScreenViewModel = hiltViewModel()
+    viewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
     val listBookUI = remember { mutableStateListOf<BookUI>() }
     val loading = remember { mutableStateOf(false) }
@@ -102,17 +103,18 @@ fun StatsScreenObserver(
 fun StatsScreenContent(
     loading: MutableState<Boolean>,
     error: MutableState<Boolean>,
-    listBookUI: SnapshotStateList<BookUI>
+    listBookUI: SnapshotStateList<BookUI>,
 ) {
 
     val navigator = LocalNavigator.currentOrThrow
+    val strings = LocalStrings.current.stats
     var books: List<BookUI> = emptyList()
     val currentUser = FirebaseAuth.getInstance().currentUser
 
     Scaffold(
         topBar = {
             TopBar(
-                title = "Book Stats",
+                title = strings.title,
                 icon = Icons.Default.ArrowBack,
                 isHomeScreen = false
             ) {
@@ -171,24 +173,25 @@ fun StatsScreenContent(
                     horizontalAlignment = Alignment.Start
                 ) {
                     Text(
-                        text = "Your Stats",
+                        text = strings.yourStatus,
                         style = MaterialTheme.typography.h5
                     )
                     Divider()
-                    Text(text = "You're reading: ${readingBooksList.size} books")
-                    Text(text = "You've read: ${readBooksList.size} books")
+                    Text(text = strings.booksReading(strings.reading, readingBooksList.size, strings.type))
+                    Text(text = strings.booksReading(strings.read, readBooksList.size, strings.type))
                 }
             }
 
             Spacer(modifier = Modifier.height(10.dp))
             Divider()
 
-            if (books.isNotEmpty()){
-                LazyColumn(modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(16.dp)
-                ){
-                    items(items = readBooksList){
-                        CardBookSearch(it){}
+            if (books.isNotEmpty()) {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(16.dp)
+                ) {
+                    items(items = readBooksList) {
+                        CardBookSearch(it) {}
                     }
                 }
             }

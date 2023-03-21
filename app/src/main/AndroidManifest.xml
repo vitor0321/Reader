@@ -11,31 +11,20 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Reader"
         android:supportsRtl="true"
         android:theme="@style/Theme.Reader"
         tools:targetApi="31">
         <activity
             android:name="com.walcker.reader.presentation.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="Reader"
             android:theme="@style/Theme.Reader">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-<!--            <intent-filter android:autoVerify="true">-->
-<!--                <action android:name="android.intent.action.ACTION_DEFAULT" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.SEND" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-
-<!--            </intent-filter>-->
         </activity>
     </application>
 </manifest>

@@ -26,6 +26,7 @@ import com.walcker.reader.presentation.components.Loading
 import com.walcker.reader.presentation.components.TopBar
 import com.walcker.reader.presentation.steps.detatils.areas.ShowBooksDetailsArea
 import com.walcker.reader.presentation.steps.search.SearchScreen
+import com.walcker.reader.resource.LocalStrings
 
 class DetailsScreen(val bookId: String) : Step("detail_screen") {
 
@@ -43,6 +44,7 @@ fun DetailsScreenContent(
 ) {
 
     val navigator = LocalNavigator.currentOrThrow
+    val strings = LocalStrings.current
     val bookInfo = produceState<ResultStatus<BookUI>>(initialValue = ResultStatus.Loading) {
         value = viewModel.getBookIdInfo(bookId)
     }.value
@@ -50,7 +52,7 @@ fun DetailsScreenContent(
     Scaffold(
         topBar = {
             TopBar(
-                title = "Details",
+                title = strings.details.title,
                 icon = Icons.Default.ArrowBack,
                 isHomeScreen = false
             ) {

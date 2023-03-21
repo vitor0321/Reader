@@ -29,7 +29,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -38,13 +37,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.walcker.reader.R
 import com.walcker.reader.presentation.common.Step
 import com.walcker.reader.presentation.components.InputField
 import com.walcker.reader.presentation.components.InputFieldPassword
 import com.walcker.reader.presentation.components.Loading
 import com.walcker.reader.presentation.components.ReaderLogo
 import com.walcker.reader.presentation.steps.home.HomeScreen
+import com.walcker.reader.resource.LocalStrings
 
 object LoginScreen : Step("login_screen") {
 
@@ -105,8 +104,9 @@ object LoginScreen : Step("login_screen") {
 fun UserForm(
     loading: Boolean = false,
     isCreateAccount: Boolean = false,
-    onDone: (String, String) -> Unit
+    onDone: (String, String) -> Unit,
 ) {
+    val strings = LocalStrings.current
 
     val email = rememberSaveable { mutableStateOf("") }
     val password = rememberSaveable { mutableStateOf("") }
@@ -125,7 +125,7 @@ fun UserForm(
     ) {
 
         if (isCreateAccount) Text(
-            text = stringResource(id = R.string.create_acct),
+            text = strings.login.createAccountMessage,
             modifier = Modifier.padding(8.dp),
             fontStyle = FontStyle.Italic,
             color = Color.Yellow.copy(alpha = 0.7f)
@@ -169,7 +169,7 @@ private fun SubmitButton(
     textId: String,
     loading: Boolean,
     validInputs: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Button(
         onClick = { onClick() },
