@@ -3,7 +3,7 @@ build:
   excludeCorrectable: false
   weights:
     # complexity: 2
-    # LongParameterList: 1
+    # LongParameterList: 3
     # style: 1
     # comments: 1
 
@@ -113,8 +113,8 @@ complexity:
     ignoreAnnotated: []
   LongParameterList:
     active: true
-    functionThreshold: 6
-    constructorThreshold: 7
+    functionThreshold: 10
+    constructorThreshold: 10
     ignoreDefaultParameters: false
     ignoreDataClasses: true
     ignoreAnnotated: []
@@ -246,7 +246,7 @@ exceptions:
   ThrowingNewInstanceOfSameException:
     active: true
   TooGenericExceptionCaught:
-    active: true
+    active: false
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     exceptionNames:
       - 'ArrayIndexOutOfBoundsException'

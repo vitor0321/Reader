@@ -1,30 +1,23 @@
 package com.walcker.reader.di
 
-import com.walcker.domain.data.utils.Constants.BASE_URL
 import com.walcker.reader.BuildConfig
 import com.walcker.reader.data.network.BooksApi
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import com.walcker.reader.di.Constants.TIMEOUT_SECONDS
+import com.walcker.reader.domain.utils.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.kodein.di.DI
+import org.kodein.di.bind
+import org.kodein.di.instance
+import org.kodein.di.singleton
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-object NetworkModule {
+val networkModule = DI.Module("networkModule") {
 
-    private const val TIMEOUT_SECONDS = 15L
-
-    @Singleton
-    @Provides
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
+    bind<HttpLoggingInterceptor>() with singleton {
+        HttpLoggingInterceptor().apply {
             setLevel(
                 if (BuildConfig.DEBUG) {
                     HttpLoggingInterceptor.Level.BODY
@@ -33,35 +26,28 @@ object NetworkModule {
         }
     }
 
-    @Singleton
-    @Provides
-    fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
+    bind<OkHttpClient>() with singleton {
+        OkHttpClient.Builder()
+            .addInterceptor(instance<HttpLoggingInterceptor>())
             .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .build()
     }
 
-    @Singleton
-    @Provides
-    fun provideGsonConverterFactory(): GsonConverterFactory{
-        return GsonConverterFactory.create()
+    bind<GsonConverterFactory>() with singleton {
+        GsonConverterFactory.create()
     }
 
-    @Singleton
-    @Provides
-    fun provideRetrofit(
-        okHttpClient: OkHttpClient,
-        converterFactory: GsonConverterFactory,
-    ): BooksApi {
-        return Retrofit.Builder()
+    bind<BooksApi>() with singleton {
+        Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(converterFactory)
+            .client(instance())
+            .addConverterFactory(instance())
             .build()
             .create(BooksApi::class.java)
     }
+}
+
+internal object Constants {
+    const val TIMEOUT_SECONDS = 15L
 }

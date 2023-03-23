@@ -2,7 +2,7 @@ package com.walcker.reader.resource
 
 import cafe.adriel.lyricist.LyricistStrings
 
-@LyricistStrings(languageTag = Locales.PT, default = true)
+@LyricistStrings(languageTag = Locales.PT, default = false)
 internal val StringsPt = Strings(
     update = StringsUpdate(
         title = "Update",

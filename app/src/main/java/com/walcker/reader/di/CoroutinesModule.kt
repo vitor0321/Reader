@@ -1,18 +1,14 @@
 package com.walcker.reader.di
 
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import com.walcker.domain.usecase.base.AppCoroutinesDispatchers
-import com.walcker.domain.usecase.base.CoroutinesDispatchers
-import javax.inject.Singleton
+import com.walcker.reader.domain.utils.AppCoroutinesDispatchers
+import com.walcker.reader.domain.utils.CoroutinesDispatchers
+import org.kodein.di.DI
+import org.kodein.di.bind
+import org.kodein.di.singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-interface CoroutinesModule {
+val coroutinesModule = DI.Module("coroutinesModule") {
 
-    @Singleton
-    @Binds
-    fun bindDispatcher(dispatchers: AppCoroutinesDispatchers): CoroutinesDispatchers
+    bind<CoroutinesDispatchers>() with singleton {
+        AppCoroutinesDispatchers()
+    }
 }

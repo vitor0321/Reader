@@ -1,7 +1,7 @@
 package com.walcker.reader.data.network
 
-import com.walcker.reader.data.models.response.Item
-import com.walcker.reader.data.models.response.ResponseBook
+import com.walcker.reader.data.models.Item
+import com.walcker.reader.data.models.ResponseBook
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
