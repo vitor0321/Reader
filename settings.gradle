@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Reader"
 include ':app'
+include ':search'
+include ':search:search'

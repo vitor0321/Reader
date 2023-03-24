@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1001957858356",
+    "project_id": "reader-c214c",
+    "storage_bucket": "reader-c214c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001957858356:android:82e5b3beb8183a1276be61",
+        "android_client_info": {
+          "package_name": "com.walcker.reader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001957858356-k2no792q5il9vleoashghkrtnt2l4811.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.walcker.reader",
+            "certificate_hash": "65237a29d8d5485196ad92a5e74b5ce4108fe67f"
+          }
+        },
+        {
+          "client_id": "1001957858356-p6g79hfn23608domnt4eucfumhf3b9ro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnSYVuzwRUNauZg96eBxC0aBu2-D28cZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001957858356-p6g79hfn23608domnt4eucfumhf3b9ro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

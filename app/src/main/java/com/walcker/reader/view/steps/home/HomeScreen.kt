@@ -1,5 +1,10 @@
 package com.walcker.reader.view.steps.home
 
+import android.app.Activity
+import android.content.Intent
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +18,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -21,11 +27,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat.startActivity
 import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.google.firebase.auth.FirebaseAuth
+import com.itau.search.view.SearchActivity
 import com.walcker.reader.domain.model.BookUI
 import com.walcker.reader.resource.LocalStrings
 import com.walcker.reader.view.components.FloatButton
@@ -94,6 +103,7 @@ private fun HomeContent(
 ) {
     val navigator = LocalNavigator.currentOrThrow
     val strings = LocalStrings.current
+    val context = LocalContext.current
 
     Scaffold(
         topBar = { TopBar(title = strings.home.title) },
@@ -101,7 +111,8 @@ private fun HomeContent(
         floatingActionButton = {
             Row {
                 FloatButton(icon = Icons.Default.Add) {
-                    navigator.push(SearchScreen)
+                    startActivity(context, Intent(context, SearchActivity::class.java), null)
+                    //navigator.push(SearchScreen)
                 }
             }
         }
