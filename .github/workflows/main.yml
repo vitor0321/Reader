@@ -1,0 +1,67 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
+    - name: Run unit tests
+      run: |
+        ./gradlew test
+
+    - name: Check code quality with lint
+      run: |
+        ./gradlew lint
+
+    - name: Checkstyle
+      run: |
+        # Comando para verificar o estilo de código com Checkstyle, se aplicável
+
+    - name: Generate code coverage report
+      run: |
+        ./gradlew jacocoTestReport
+
+    - name: Deploy to Firebase App Distribution
+      run: |
+        # Comando para fazer o upload do APK/bundle para o Firebase App Distribution, se aplicável
+
+    - name: Deploy to Google Play Console
+      run: |
+        # Comando para fazer o upload do APK/bundle para o Google Play Console, se aplicável
+
+    - name: Generate documentation
+      run: |
+        # Comando para gerar documentação do código, se aplicável
+
+    - name: Security Scan
+      run: |
+        # Comando para verificar segurança, verificação de vulnerabilidades ou verificações de dependências, se aplicável
+
+    - name: Update Version Number
+      run: |
+        # Comando para atualizar automaticamente o número da versão do aplicativo, se aplicável
+
+    # Adicione outras etapas e comandos aqui, se necessário
