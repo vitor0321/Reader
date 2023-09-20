@@ -1,6 +1,6 @@
 # Reader
 App para controlar a suas leituras, podendo classificar, fazer anotações e ver detalhes sobre o livro, como: autores, publicação, comentário, etc...
-Para fazer pesquisa e encontrar o seus livros, estamos usando a API do Google.
+Para fazer pesquisa e encontrar o seus livros, estamos usando a API do Google. 
 Na construção do APP estamos usando o que há de mais moderno no desenvolvimento Android, como por exemplo:
 
 ##Tools:
